@@ -17,7 +17,7 @@ var clouds;
 var mountains;
 var trees_x;
 var canyons;
-var collectables
+var collectables;
 
 function setup()
 {
@@ -49,10 +49,10 @@ function setup()
 		{x_pos: 1600, y_pos: 0}
 	];
 	canyons = [
-		{x_pos: -1300, width: 100},
-		{x_pos: 0, width: 100},
-		{x_pos: 470, width: 100},
-		{x_pos: 1150, width: 100}
+		{x_pos: -1200, width: 100},
+		{x_pos: 100, width: 100},
+		{x_pos: 570, width: 100},
+		{x_pos: 1250, width: 100}
 	];
 	collectables = [
 		{x_pos: -650, y_pos: 400},
@@ -80,21 +80,21 @@ function draw()
 	for (var i = 0; i < clouds.length; i++)
 	{
 		fill(255);
-		ellipse(clouds[i].x_pos + 100, clouds[i].y_pos, 60, 60);
-		ellipse(clouds[i].x_pos + 130, clouds[i].y_pos, 80, 80);
-		ellipse(clouds[i].x_pos + 160, clouds[i].y_pos, 60, 60);
+		ellipse(clouds[i].x_pos, clouds[i].y_pos, 60, 60);
+		ellipse(clouds[i].x_pos + 30, clouds[i].y_pos, 80, 80);
+		ellipse(clouds[i].x_pos + 60, clouds[i].y_pos, 60, 60);
 	}
 	// Draw mountainss.
 	for (var i = 0; i < mountains.length; i++)
 	{
 		fill(189, 181, 191);
-		triangle(mountains[i].x_pos + 300, mountains[i].y_pos + 432, mountains[i].x_pos + 550, mountains[i].y_pos + 432, mountains[i].x_pos + 425, mountains[i].y_pos + 100); //left,right,middle
+		triangle(mountains[i].x_pos + 300, mountains[i].y_pos + 432, mountains[i].x_pos + 425, mountains[i].y_pos + 100, mountains[i].x_pos + 550, mountains[i].y_pos + 432); //left,middle, right
 		fill(232, 225, 234);
-		triangle(mountains[i].x_pos + 200, mountains[i].y_pos + 432, mountains[i].x_pos + 400, mountains[i].y_pos + 432, mountains[i].x_pos + 300, mountains[i].y_pos + 200);//left,right,middle
+		triangle(mountains[i].x_pos + 200, mountains[i].y_pos + 432, mountains[i].x_pos + 300, mountains[i].y_pos + 200, mountains[i].x_pos + 400, mountains[i].y_pos + 432);//left,right,middle
 		//Snow
 		fill(255);
-		triangle(mountains[i].x_pos + 425, mountains[i].y_pos + 100, mountains[i].x_pos + 449, mountains[i].y_pos + 160, mountains[i].x_pos + 389, mountains[i].y_pos + 195);
-		triangle(mountains[i].x_pos + 300, mountains[i].y_pos + 200, mountains[i].x_pos + 325, mountains[i].y_pos + 260, mountains[i].x_pos + 259, mountains[i].y_pos + 295);
+		triangle(mountains[i].x_pos + 425, mountains[i].y_pos + 100, mountains[i].x_pos + 389, mountains[i].y_pos + 195, mountains[i].x_pos + 449, mountains[i].y_pos + 160);
+		triangle(mountains[i].x_pos + 300, mountains[i].y_pos + 200, mountains[i].x_pos + 259, mountains[i].y_pos + 295, mountains[i].x_pos + 325, mountains[i].y_pos + 260);
 	}
 
 	// Draw trees.
@@ -107,15 +107,15 @@ function draw()
 		//leaves
 		fill(195,167,201);
 		ellipse(trees_x[i] + 20,-200/2 + floorPos_y, 144, 120);
-		ellipse(trees_x[i] + 20,-200/2 + floorPos_y - 58, 96, 80);
-		ellipse(trees_x[i] + 20,-200/2 + floorPos_y - 108, 48, 40);
+		ellipse(trees_x[i] + 20,-350/2 + floorPos_y, 96, 80);
+		ellipse(trees_x[i] + 20,-450/2 + floorPos_y, 48, 40);
 	}
 
 	// Draw canyons
 	for (var i = 0; i < canyons.length; i++)
 	{
 		fill(173, 241, 244);
-		rect(canyons[i].x_pos + 100, floorPos_y, canyons[i].width, 144);
+		rect(canyons[i].x_pos, floorPos_y, canyons[i].width, 144);
 	}
 	// Draw collectable items
 
@@ -133,7 +133,7 @@ function draw()
 	pop();
 
 	// Draw the game character - this must be last
-
+	//ears
 	fill(222, 184, 135);
 	ellipse(gameChar_x - 10, gameChar_y - 57, 12);
 	ellipse(gameChar_x + 10, gameChar_y - 57, 12);
@@ -161,16 +161,16 @@ function draw()
 	ellipse(gameChar_x - 13,gameChar_y - 3, 10, 14);
 	ellipse(gameChar_x + 13,gameChar_y - 3, 10, 14);
 	//arms
-	push();
-	translate(gameChar_x + 12,gameChar_y - 25);
+	push(); // Start a new drawing state
+	translate(gameChar_x + 12,gameChar_y - 25); //translate so that arm moves vertical with body
 	rotate(HALF_PI / 3.0);
 	ellipse(0,0, 10, 13);
-	pop();
-	push();
-	translate(gameChar_x - 12,gameChar_y - 25);
+	pop(); // Restore original state
+	push(); // Start a new drawing state
+	translate(gameChar_x - 12,gameChar_y - 25); //translate so that arm moves vertical with body
 	rotate(HALF_PI / -3.0);
 	ellipse(0,0, 10, 13);
-	pop();
+	pop(); // Restore original state
 
 	//////// Game character logic ///////
 	// Logic to move
